@@ -78,9 +78,9 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.json
   def destroy
     @project.destroy
-
+    undo_link = view_context.link_to("Undo", revert_to_path(@project.versions.scoped.last.id), method: :post)
     respond_to do |format|
-      format.html { redirect_to projects_url }
+      format.html { redirect_to projects_url, notice: "Project was successfully deleted. #{undo_link}" }
       format.json { head :ok }
     end
   end

@@ -1,4 +1,4 @@
 - if flash && flash.any?
   #flash
     - flash.each do |name, msg|
-      = content_tag :div, msg, :class => "flash #{name}"
+      = content_tag :div, raw(msg), :class => "flash #{name}"

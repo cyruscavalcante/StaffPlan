@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   
+  has_paper_trail
   attr_accessible :name, :active
   
   belongs_to  :client
