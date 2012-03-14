@@ -142,18 +142,22 @@ describe ProjectsController do
 
   describe "DELETE destroy" do
     it "destroys the requested project" do
-      project = Factory(:project)
-      @company.projects << project
-      expect {
-        delete :destroy, :id => project.id
-      }.to change(Project, :count).by(-1)
+      with_versioning do
+        project = Factory(:project)
+        @company.projects << project
+        expect {
+          delete :destroy, :id => project.id
+        }.to change(Project, :count).by(-1)
+      end
     end
 
     it "redirects to the projects list" do
-      project = Factory(:project)
-      @company.projects << project
-      delete :destroy, :id => project.id
-      response.should redirect_to(projects_url)
+      with_versioning do
+        project = Factory(:project)
+        @company.projects << project
+        delete :destroy, :id => project.id
+        response.should redirect_to(projects_url)
+      end
     end
   end
 
